@@ -5,12 +5,28 @@ import { motion, useInView } from "framer-motion";
 import { CheckCircle2 } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { workflows } from "@/lib/data";
+import SyntaxHighlighter from "react-syntax-highlighter";
+import { atomOneDark } from "react-syntax-highlighter/dist/esm/styles/hljs";
 
 const accentColors: Record<string, string> = {
-  playwright: "var(--color-brand)",
-  mcp:        "var(--color-mcp)",
-  cicd:       "var(--color-success)",
-  reports:    "var(--color-warn)",
+  playwright: "#2dd4bf",
+  mcp:        "#a855f7",
+  cicd:       "#4ade80",
+  reports:    "#fbbf24",
+};
+
+const fileNames: Record<string, string> = {
+  playwright: "playwright.spec.ts",
+  mcp:        "mcp-debug.ts",
+  cicd:       ".github/workflows/playwright.yml",
+  reports:    "playwright.config.ts",
+};
+
+const langs: Record<string, string> = {
+  playwright: "typescript",
+  mcp:        "typescript",
+  cicd:       "yaml",
+  reports:    "typescript",
 };
 
 export default function WorkflowsSection() {
@@ -20,7 +36,6 @@ export default function WorkflowsSection() {
   return (
     <section id="workflows" ref={ref} className="py-28 px-6">
       <div className="max-w-6xl mx-auto space-y-12">
-        {/* Heading */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -45,21 +60,34 @@ export default function WorkflowsSection() {
                 <TabsTrigger
                   key={w.id}
                   value={w.id}
-                  className="rounded-lg text-xs font-mono font-medium data-[state=active]:bg-background data-[state=active]:text-brand data-[state=active]:shadow-sm py-2.5"
+                  className="rounded-lg text-xs font-mono font-medium data-[state=active]:bg-background data-[state=active]:shadow-sm py-2.5"
+                  style={
+                    {
+                      "--tw-text-opacity": 1,
+                    } as React.CSSProperties
+                  }
                 >
-                  {w.label}
+                  <span
+                    className="data-[state=active]:text-inherit"
+                    style={{ color: "inherit" }}
+                  >
+                    {w.label}
+                  </span>
                 </TabsTrigger>
               ))}
             </TabsList>
 
             {workflows.map((w) => {
-              const accent = accentColors[w.id] ?? "var(--color-brand)";
+              const accent = accentColors[w.id] ?? "#2dd4bf";
+              const lang   = langs[w.id]        ?? "typescript";
+              const fname  = fileNames[w.id]    ?? "code.ts";
+
               return (
                 <TabsContent key={w.id} value={w.id} className="mt-0">
                   <motion.div
                     initial={{ opacity: 0, y: 12 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.35 }}
+                    transition={{ duration: 0.3 }}
                     className="grid md:grid-cols-2 gap-6"
                   >
                     {/* Code block */}
@@ -67,45 +95,55 @@ export default function WorkflowsSection() {
                       className="rounded-xl border overflow-hidden"
                       style={{ borderColor: `${accent}30` }}
                     >
-                      {/* Code window chrome */}
+                      {/* Window chrome */}
                       <div
-                        className="flex items-center gap-2 px-4 py-3 border-b"
+                        className="flex items-center gap-2 px-4 py-2.5 border-b"
                         style={{
                           borderColor: `${accent}20`,
-                          background: `oklch(from ${accent} l c h / 0.06)`,
+                          background: "#1a1a2e",
                         }}
                       >
-                        <span className="w-3 h-3 rounded-full bg-red-500/60" />
-                        <span className="w-3 h-3 rounded-full bg-yellow-500/60" />
-                        <span className="w-3 h-3 rounded-full bg-green-500/60" />
-                        <span className="ml-3 font-mono text-xs text-muted-foreground">
-                          {w.id === "playwright" && "playwright.spec.ts"}
-                          {w.id === "mcp"        && "mcp-debug.session"}
-                          {w.id === "cicd"       && "playwright.yml"}
-                          {w.id === "reports"    && "playwright.config.ts"}
+                        <span className="w-3 h-3 rounded-full bg-red-500/70" />
+                        <span className="w-3 h-3 rounded-full bg-yellow-500/70" />
+                        <span className="w-3 h-3 rounded-full bg-green-500/70" />
+                        <span
+                          className="ml-3 font-mono text-xs"
+                          style={{ color: `${accent}90` }}
+                        >
+                          {fname}
                         </span>
                       </div>
-                      <pre
-                        className="overflow-x-auto p-5 text-xs leading-relaxed font-mono"
-                        style={{ background: "oklch(0.12 0 0)" }}
-                      >
-                        <code
-                          className="text-muted-foreground"
-                          style={{ "--accent": accent } as React.CSSProperties}
-                          dangerouslySetInnerHTML={{
-                            __html: highlightCode(w.code, w.id),
+
+                      {/* Highlighted code */}
+                      <div className="overflow-x-auto text-xs leading-relaxed">
+                        <SyntaxHighlighter
+                          language={lang}
+                          style={atomOneDark}
+                          customStyle={{
+                            margin: 0,
+                            padding: "1.25rem",
+                            background: "#0d0d1a",
+                            fontSize: "0.72rem",
+                            lineHeight: "1.65",
                           }}
-                        />
-                      </pre>
+                          showLineNumbers
+                          lineNumberStyle={{
+                            color: "#3a3a5a",
+                            minWidth: "2em",
+                            paddingRight: "1em",
+                            userSelect: "none",
+                          }}
+                          wrapLines
+                        >
+                          {w.code}
+                        </SyntaxHighlighter>
+                      </div>
                     </div>
 
                     {/* Description + bullets */}
                     <div className="space-y-6 flex flex-col justify-center">
                       <div className="space-y-3">
-                        <h3
-                          className="text-lg font-bold"
-                          style={{ color: accent }}
-                        >
+                        <h3 className="text-lg font-bold" style={{ color: accent }}>
                           {w.title}
                         </h3>
                         <p className="text-sm text-muted-foreground leading-relaxed">
@@ -131,6 +169,22 @@ export default function WorkflowsSection() {
                           </motion.li>
                         ))}
                       </ul>
+
+                      {/* Accent pill */}
+                      <div
+                        className="inline-flex items-center gap-2 self-start px-3 py-1.5 rounded-full text-xs font-mono border"
+                        style={{
+                          borderColor: `${accent}30`,
+                          background: `${accent}10`,
+                          color: accent,
+                        }}
+                      >
+                        <span
+                          className="w-1.5 h-1.5 rounded-full"
+                          style={{ background: accent }}
+                        />
+                        {w.label} workflow
+                      </div>
                     </div>
                   </motion.div>
                 </TabsContent>
@@ -141,52 +195,4 @@ export default function WorkflowsSection() {
       </div>
     </section>
   );
-}
-
-function highlightCode(code: string, id: string): string {
-  const keywords  = ["import", "from", "export", "default", "const", "let", "return",
-                     "async", "await", "new", "type", "interface", "extends", "class",
-                     "if", "else", "undefined", "null", "true", "false", "always"];
-  const types     = ["Page", "Locator", "Metadata", "defineConfig", "devices", "test", "expect"];
-  const strings   = /"([^"\\]|\\.)*"|'([^'\\]|\\.)*'|`([^`\\]|\\.)*`/g;
-  const comments  = /\/\/.+/g;
-  const numbers   = /\b\d+\b/g;
-  const decorators = /@\w+/g;
-
-  const color: Record<string, string> = {
-    playwright: "oklch(0.82 0.18 198)",
-    mcp:        "oklch(0.72 0.22 284)",
-    cicd:       "oklch(0.72 0.18 145)",
-    reports:    "oklch(0.78 0.17 80)",
-  };
-  const accent = color[id] ?? color.playwright;
-
-  let out = escapeHtml(code);
-
-  out = out.replace(comments, (m) => `<span style="color:oklch(0.55 0 0);font-style:italic">${m}</span>`);
-  out = out.replace(strings,  (m) => `<span style="color:oklch(0.72 0.18 145)">${m}</span>`);
-  out = out.replace(numbers,  (m) => `<span style="color:oklch(0.78 0.17 80)">${m}</span>`);
-  out = out.replace(decorators, (m) => `<span style="color:${accent}">${m}</span>`);
-
-  keywords.forEach((kw) => {
-    out = out.replace(
-      new RegExp(`\\b${kw}\\b`, "g"),
-      `<span style="color:oklch(0.72 0.22 284)">${kw}</span>`
-    );
-  });
-  types.forEach((t) => {
-    out = out.replace(
-      new RegExp(`\\b${t}\\b`, "g"),
-      `<span style="color:${accent}">${t}</span>`
-    );
-  });
-
-  return out;
-}
-
-function escapeHtml(str: string) {
-  return str
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;");
 }
