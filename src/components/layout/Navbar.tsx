@@ -46,50 +46,55 @@ export default function Navbar() {
       transition={{ duration: 0.5, ease: "easeOut" as const }}
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-background/80 backdrop-blur-xl border-b border-border/30"
+          ? "bg-[oklch(0.145_0_0/0.85)] backdrop-blur-xl border-b border-white/[0.06]"
           : "bg-transparent"
       }`}
     >
-      <nav className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between gap-8">
+      <nav className="max-w-5xl mx-auto px-6 h-[62px] flex items-center justify-between gap-6">
+
         {/* Logo */}
-        <a
-          href="#hero"
-          className="font-mono text-sm font-bold tracking-wider text-foreground hover:text-brand transition-colors shrink-0"
-        >
-          UK<span className="text-brand">.</span>
+        <a href="#hero" className="flex items-center gap-1.5 shrink-0 group">
+          <span className="w-7 h-7 rounded-lg bg-brand flex items-center justify-center text-xs font-bold text-background leading-none">
+            UK
+          </span>
+          <span className="hidden sm:block text-sm font-semibold text-foreground/80 group-hover:text-foreground transition-colors">
+            Uday Kiran
+          </span>
         </a>
 
-        {/* Desktop links */}
-        <ul className="hidden md:flex items-center gap-1 flex-1 justify-center">
-          {links.map((l) => (
-            <li key={l.href}>
+        {/* Desktop links — pill container */}
+        <div className="hidden md:flex items-center gap-0.5 px-1.5 py-1 rounded-full border border-white/[0.07] bg-white/[0.03]">
+          {links.map((l) => {
+            const isActive = active === l.href.slice(1);
+            return (
               <a
+                key={l.href}
                 href={l.href}
-                className={`relative px-3 py-1.5 text-sm font-medium transition-colors duration-200 ${
-                  active === l.href.slice(1)
+                className={`relative px-3.5 py-1.5 rounded-full text-sm font-medium transition-all duration-200 ${
+                  isActive
                     ? "text-foreground"
-                    : "text-muted-foreground hover:text-foreground"
+                    : "text-muted-foreground hover:text-foreground/80"
                 }`}
               >
-                {l.label}
-                {active === l.href.slice(1) && (
+                {isActive && (
                   <motion.span
-                    layoutId="nav-active"
-                    className="absolute inset-0 rounded-md bg-white/[0.06]"
-                    transition={{ type: "spring", duration: 0.3 }}
+                    layoutId="nav-pill"
+                    className="absolute inset-0 rounded-full bg-white/[0.09]"
+                    transition={{ type: "spring", stiffness: 400, damping: 35 }}
                   />
                 )}
+                <span className="relative z-10">{l.label}</span>
               </a>
-            </li>
-          ))}
-        </ul>
+            );
+          })}
+        </div>
 
         {/* CTA */}
         <a
           href={personal.linkedin}
           target="_blank"
           rel="noopener noreferrer"
-          className="hidden md:inline-flex items-center px-4 py-1.5 rounded-full border border-brand/30 text-brand text-xs font-mono font-medium hover:bg-brand/[0.07] transition-all duration-200 shrink-0"
+          className="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand text-background text-sm font-semibold hover:opacity-90 active:scale-95 transition-all duration-200 shrink-0"
         >
           Hire Me
         </a>
@@ -97,7 +102,7 @@ export default function Navbar() {
         {/* Mobile hamburger */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          className="md:hidden p-1.5 text-muted-foreground hover:text-foreground transition-colors"
+          className="md:hidden p-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-white/[0.06] transition-colors"
           aria-label="Toggle menu"
         >
           {menuOpen ? <X size={20} /> : <Menu size={20} />}
@@ -108,23 +113,34 @@ export default function Navbar() {
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden border-t border-border/30 bg-background/95 backdrop-blur-xl"
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.2 }}
+            className="md:hidden border-t border-white/[0.06] bg-[oklch(0.145_0_0/0.96)] backdrop-blur-xl"
           >
-            <ul className="max-w-5xl mx-auto px-6 py-4 flex flex-col gap-0.5">
+            <ul className="max-w-5xl mx-auto px-6 py-3 flex flex-col gap-0.5">
               {links.map((l) => (
                 <li key={l.href}>
                   <a
                     href={l.href}
                     onClick={() => setMenuOpen(false)}
-                    className="block px-3 py-2.5 rounded-md text-sm text-muted-foreground hover:text-foreground hover:bg-white/[0.04] transition-colors"
+                    className="flex items-center px-3 py-2.5 rounded-lg text-sm text-muted-foreground hover:text-foreground hover:bg-white/[0.05] transition-colors"
                   >
                     {l.label}
                   </a>
                 </li>
               ))}
+              <li className="pt-2 border-t border-white/[0.06] mt-1">
+                <a
+                  href={personal.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center px-3 py-2.5 rounded-lg bg-brand text-background text-sm font-semibold"
+                >
+                  Hire Me
+                </a>
+              </li>
             </ul>
           </motion.div>
         )}
