@@ -5,7 +5,7 @@ import { personal } from "@/lib/data";
 export default function Footer() {
   return (
     <footer className="border-t border-border/40 py-10 px-6">
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+      <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
         <p className="font-mono text-xs text-muted-foreground">
           © {new Date().getFullYear()} Uday Kiran Kota — Built with Next.js &amp; Playwright mindset.
         </p>
