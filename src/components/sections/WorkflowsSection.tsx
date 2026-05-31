@@ -40,13 +40,21 @@ export default function WorkflowsSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
-          className="space-y-2"
+          className="flex items-start gap-6"
         >
-          <p className="font-mono text-xs text-brand tracking-widest uppercase">How I Work</p>
-          <h2 className="text-3xl md:text-4xl font-bold">
-            Systems thinking,{" "}
-            <span className="text-brand">not just test writing.</span>
-          </h2>
+          <span
+            className="hidden md:block text-8xl font-black leading-none select-none shrink-0"
+            style={{ color: "oklch(0.82 0.18 198 / 0.08)" }}
+          >
+            03
+          </span>
+          <div className="space-y-2 pt-1">
+            <p className="font-mono text-xs text-brand tracking-widest uppercase">How I Work</p>
+            <h2 className="text-3xl md:text-4xl font-bold">
+              Systems thinking,{" "}
+              <span className="text-brand">not just test writing.</span>
+            </h2>
+          </div>
         </motion.div>
 
         <motion.div

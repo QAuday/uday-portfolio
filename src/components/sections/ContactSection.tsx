@@ -54,7 +54,15 @@ export default function ContactSection() {
           className="text-center space-y-3"
         >
           <p className="font-mono text-xs text-brand tracking-widest uppercase">Contact</p>
-          <h2 className="text-3xl md:text-4xl font-bold">Let&apos;s Talk</h2>
+          <div className="flex items-center justify-center gap-4">
+            <span
+              className="hidden md:block text-7xl font-black leading-none select-none"
+              style={{ color: "oklch(0.82 0.18 198 / 0.08)" }}
+            >
+              06
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold">Let&apos;s Talk</h2>
+          </div>
           <p className="text-muted-foreground text-sm max-w-md mx-auto">
             Open to senior QA engineering and quality engineering lead roles.
           </p>

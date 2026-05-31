@@ -20,9 +20,17 @@ export default function ProjectsSection() {
           transition={{ duration: 0.5 }}
           className="flex flex-col md:flex-row md:items-end md:justify-between gap-4"
         >
-          <div className="space-y-2">
-            <p className="font-mono text-xs text-brand tracking-widest uppercase">Open Source</p>
-            <h2 className="text-3xl md:text-4xl font-bold">GitHub Projects</h2>
+          <div className="flex items-start gap-5">
+            <span
+              className="hidden md:block text-8xl font-black leading-none select-none shrink-0"
+              style={{ color: "oklch(0.82 0.18 198 / 0.08)" }}
+            >
+              04
+            </span>
+            <div className="space-y-2 pt-1">
+              <p className="font-mono text-xs text-brand tracking-widest uppercase">Open Source</p>
+              <h2 className="text-3xl md:text-4xl font-bold">GitHub Projects</h2>
+            </div>
           </div>
           <a
             href={personal.github}
