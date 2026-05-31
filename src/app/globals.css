@@ -4,6 +4,21 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Portfolio brand tokens */
+@theme inline {
+  --color-brand:       oklch(0.82 0.18 198);   /* electric teal  */
+  --color-brand-dim:   oklch(0.82 0.18 198 / 0.12);
+  --color-brand-glow:  oklch(0.82 0.18 198 / 0.25);
+  --color-mcp:         oklch(0.72 0.22 284);   /* violet — MCP/AI */
+  --color-mcp-dim:     oklch(0.72 0.22 284 / 0.12);
+  --color-warn:        oklch(0.78 0.17  80);   /* amber  — k6     */
+  --color-warn-dim:    oklch(0.78 0.17  80 / 0.12);
+  --color-info:        oklch(0.68 0.19 240);   /* blue   — TS     */
+  --color-info-dim:    oklch(0.68 0.19 240 / 0.12);
+  --color-success:     oklch(0.72 0.18 145);   /* green  — CI     */
+  --color-success-dim: oklch(0.72 0.18 145 / 0.12);
+}
+
 html {
   height: 100%;
 }
