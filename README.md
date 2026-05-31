@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Uday Kiran — Developer Portfolio
+
+A modern, performant personal portfolio built with Next.js 16, Tailwind CSS v4, and shadcn/ui. Designed to showcase projects, skills, and experience with smooth animations and a clean, professional aesthetic.
+
+## Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Framework | Next.js 16 (App Router) |
+| Language | TypeScript |
+| Styling | Tailwind CSS v4 |
+| Component Library | shadcn/ui (Radix + Nova preset) |
+| Animations | Framer Motion |
+| Forms | React Hook Form + Zod |
+| Package Manager | npm |
+
+## Project Structure
+
+```
+uday-portfolio/
+├── src/
+│   ├── app/              # Next.js App Router pages and layouts
+│   ├── components/       # Reusable UI components
+│   │   └── ui/           # shadcn/ui primitives
+│   └── lib/              # Utilities and helpers
+├── docs/                 # Architecture notes and design decisions
+├── assets/
+│   ├── screenshots/      # App screenshots for README / docs
+│   └── resume/           # Resume files
+└── public/               # Static assets
+```
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+# Install dependencies
+npm install
+
+# Start development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Available Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run dev      # Start dev server with hot reload
+npm run build    # Production build
+npm run start    # Start production server
+npm run lint     # Run ESLint
+```
 
-## Learn More
+## Planned Sections
 
-To learn more about Next.js, take a look at the following resources:
+- **Hero** — Animated introduction and call-to-action
+- **About** — Background, skills, and personal summary
+- **Projects** — Showcase with live demos and source links
+- **Experience** — Timeline of professional roles
+- **Contact** — Form with validation (React Hook Form + Zod)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deployment
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Deploy to [Vercel](https://vercel.com) with zero configuration — push to main and it ships.
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Built by Uday Kiran
