@@ -37,11 +37,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
+/* moved into @layer base so Tailwind utilities can override */
 
 a {
   color: inherit;
@@ -169,6 +165,9 @@ a {
 
 @layer base {
   * {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
     @apply border-border outline-ring/50;
   }
   body {
@@ -176,5 +175,10 @@ a {
   }
   html {
     @apply font-sans;
+    scroll-behavior: smooth;
+  }
+  /* Offset sections so fixed navbar doesn't cover them */
+  section[id] {
+    scroll-margin-top: 80px;
   }
 }

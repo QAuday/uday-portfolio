@@ -145,7 +145,7 @@ export default function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex flex-col justify-center overflow-hidden"
+      className="relative min-h-screen flex flex-col overflow-hidden"
     >
       {/* ── Background layers ──────────────────────────────────── */}
       {/* Grid pattern */}
@@ -196,7 +196,7 @@ export default function HeroSection() {
       />
 
       {/* ── Content ───────────────────────────────────────────── */}
-      <div className="relative z-10 max-w-5xl mx-auto px-6 w-full py-24">
+      <div className="relative z-10 max-w-5xl mx-auto px-6 w-full" style={{ paddingTop: "100px", paddingBottom: "80px" }}>
         <div className="grid lg:grid-cols-2 gap-12 items-center">
 
           {/* Left — text */}
