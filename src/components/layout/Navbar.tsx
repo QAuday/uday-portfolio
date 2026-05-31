@@ -63,17 +63,17 @@ export default function Navbar() {
         </a>
 
         {/* Desktop links — pill container */}
-        <div className="hidden md:flex items-center gap-0.5 px-1.5 py-1 rounded-full border border-white/[0.07] bg-white/[0.03]">
+        <div className="hidden md:flex items-center gap-1 px-2 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.04]">
           {links.map((l) => {
             const isActive = active === l.href.slice(1);
             return (
               <a
                 key={l.href}
                 href={l.href}
-                className={`relative px-3.5 py-1.5 rounded-full text-sm font-medium transition-all duration-200 ${
+                className={`relative px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200 ${
                   isActive
                     ? "text-foreground"
-                    : "text-muted-foreground hover:text-foreground/80"
+                    : "text-muted-foreground hover:text-foreground"
                 }`}
               >
                 {isActive && (
