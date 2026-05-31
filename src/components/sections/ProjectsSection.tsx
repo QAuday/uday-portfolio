@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Star, ExternalLink } from "lucide-react";
+import { Star, ExternalLink, Lock } from "lucide-react";
 import { GithubIcon } from "@/components/ui/icons";
 import { projects, personal } from "@/lib/data";
 
@@ -59,6 +59,12 @@ export default function ProjectsSection() {
                   <span className="font-mono text-sm font-semibold group-hover:text-brand transition-colors">
                     {p.name}
                   </span>
+                  {p.private && (
+                    <span className="flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-mono border border-white/[0.08] text-muted-foreground/40">
+                      <Lock size={9} />
+                      Private
+                    </span>
+                  )}
                 </div>
                 <div className="flex items-center gap-1 text-muted-foreground/40 text-xs font-mono shrink-0">
                   <Star size={11} />
@@ -81,22 +87,6 @@ export default function ProjectsSection() {
             </motion.a>
           ))}
 
-          {/* Coming soon */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.3, duration: 0.45 }}
-            className="flex flex-col items-center justify-center gap-3 p-6 rounded-xl border border-dashed border-border/25 bg-muted/5 text-center min-h-[160px]"
-          >
-            <GithubIcon style={{ width: 18, height: 18 }} className="text-muted-foreground/30" />
-            <div>
-              <p className="text-sm font-medium text-foreground/50">Playwright + TypeScript Suite</p>
-              <p className="text-xs text-muted-foreground/40 mt-1">Coming soon — pushing from Hiringhood work</p>
-            </div>
-            <span className="px-3 py-1 rounded-full text-xs font-mono border border-border/20 text-muted-foreground/30">
-              In progress
-            </span>
-          </motion.div>
         </div>
 
       </div>

@@ -306,6 +306,14 @@ export const projects = [
     url: "https://github.com/QAuday/OrangeHRM_TestNG",
     stars: 0,
   },
+  {
+    name: "playwright-automation",
+    description: "Playwright + TypeScript automation suite for Hiringhood — admin persona with Page Object Model, OTP login flow, and full section coverage.",
+    tags: ["Playwright", "TypeScript", "POM"],
+    url: "https://github.com/QAuday/playwright-automation",
+    stars: 0,
+    private: true,
+  },
 ];
 
 export const certifications = [
