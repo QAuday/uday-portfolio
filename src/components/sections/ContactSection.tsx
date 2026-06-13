@@ -34,12 +34,23 @@ export default function ContactSection() {
     reset,
   } = useForm<FormData>({ resolver: zodResolver(schema) });
 
+  const [error, setError] = useState<string | null>(null);
+
   const onSubmit = async (data: FormData) => {
-    await new Promise((r) => setTimeout(r, 800));
-    console.log("Form submission:", data);
-    setSent(true);
-    reset();
-    setTimeout(() => setSent(false), 5000);
+    setError(null);
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+    if (res.ok) {
+      setSent(true);
+      reset();
+      setTimeout(() => setSent(false), 5000);
+    } else {
+      const body = await res.json().catch(() => ({}));
+      setError(body.error ?? "Something went wrong. Please try again.");
+    }
   };
 
   return (
@@ -134,6 +145,10 @@ export default function ContactSection() {
                   />
                   {errors.message && <p className="text-xs text-red-400/80">{errors.message.message}</p>}
                 </div>
+
+                {error && (
+                  <p className="text-xs text-red-400/80 text-center">{error}</p>
+                )}
 
                 <button
                   type="submit"

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowDown, CheckCircle2, XCircle, Clock, GitBranch, Zap } from "lucide-react";
+import { ArrowDown, CheckCircle2, XCircle, Clock, GitBranch, Zap, Download } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/ui/icons";
 import { personal } from "@/lib/data";
 
@@ -265,6 +265,14 @@ export default function HeroSection() {
                 className="px-6 py-2.5 rounded-full bg-brand text-background font-semibold text-sm hover:opacity-90 active:scale-95 transition-all duration-200"
               >
                 View My Work
+              </a>
+              <a
+                href={personal.resume}
+                download="Uday-Kiran-Kota-Resume.pdf"
+                className="flex items-center gap-2 px-6 py-2.5 rounded-full border border-white/[0.15] text-foreground/80 font-medium text-sm hover:border-brand/40 hover:text-brand hover:bg-brand/[0.06] transition-all duration-200 active:scale-95"
+              >
+                <Download size={13} />
+                Resume
               </a>
               <a
                 href="#contact"
